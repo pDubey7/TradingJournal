@@ -12,6 +12,7 @@ export const emotionEnum = pgEnum('emotion', ['CONFIDENT', 'NEUTRAL', 'ANXIOUS',
 // Users
 export const users = pgTable('users', {
   id: uuid('id').defaultRandom().primaryKey(),
+  walletAddress: text('wallet_address').notNull().unique(),
   email: text('email').unique(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   preferences: jsonb('preferences'),
