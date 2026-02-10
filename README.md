@@ -30,9 +30,9 @@ Most traders lose money because of psychology, not strategy.
 
 ## 🛠️ Technical Architecture
 
-We prioritized **speed, privacy, and decentralization** over historical depth. This architecture requires **NO Indexer**, making it lightweight and easy to deploy.
+I prioritized **speed, privacy, and decentralization** over historical depth. This architecture requires **NO Indexer**, making it lightweight and easy to deploy.
 
-- **Frontend:** Next.js 14, Recharts, Tailwind CSS, shadcn/ui
+- **Frontend:** Next.js 16, Recharts, Tailwind CSS, shadcn/ui
 - **Backend:** Next.js API Routes (Serverless), PostgreSQL (via Drizzle ORM)
 - **Blockchain:** Solana Web3.js, SIWS (Sign In With Solana)
 - **Data Pipeline:** Direct RPC fetching + Optimistic UI updates
@@ -59,14 +59,13 @@ We prioritized **speed, privacy, and decentralization** over historical depth. T
 
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/your-username/deriverse-analytics.git
-   cd deriverse-analytics
+   git clone https://github.com/pDubey7/TradingJournal
+   cd TradingJournal
    ```
 
 2. **Setup Environment**
    ```bash
-   cp .env.example .env.local
-   # Fill in DATABASE_URL and JWT_SECRET
+   # Fill in DATABASE_URL and JWT_SECRET in env
    ```
 
 3. **Install Dependencies**
