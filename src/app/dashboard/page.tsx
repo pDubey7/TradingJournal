@@ -1,7 +1,7 @@
 "use client";
 
 import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { ClientWalletButton } from "@/components/client-wallet-button";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Loader2, RefreshCw } from "lucide-react";
@@ -131,7 +131,7 @@ Issued At: ${new Date().toISOString()}`;
                             </Button>
                         </>
                     )}
-                    <WalletMultiButton />
+                    <ClientWalletButton />
                 </div>
             </header>
 
@@ -143,7 +143,7 @@ Issued At: ${new Date().toISOString()}`;
                         <p className="text-muted-foreground text-center max-w-md">
                             Non-custodial, read-only analytics for your trading performance on Deriverse.
                         </p>
-                        <WalletMultiButton />
+                        <ClientWalletButton />
                     </div>
                 ) : !session?.authenticated ? (
                     // Not Signed In

@@ -151,3 +151,51 @@ export interface CompleteAnalytics {
     hourlyPerformance: HourlyStats[];
     orderTypePerformance: OrderTypeStats[];
 }
+
+// Advanced Analytics Types
+export interface RiskScore {
+    overall: number;
+    level: 'CONSERVATIVE' | 'BALANCED' | 'AGGRESSIVE' | 'RECKLESS';
+    components: {
+        drawdownSeverity: number;
+        positionSizingConsistency: number;
+        overtradingIndex: number;
+        winStreakVolatility: number;
+        feeBurnRate: number;
+    };
+    recommendation: string;
+}
+
+export interface OvertradingSignal {
+    type: 'REVENGE_TRADING' | 'CHASING' | 'FATIGUE_TRADING' | 'FOMO_CLUSTERING';
+    severity: 'LOW' | 'MEDIUM' | 'HIGH';
+    message: string;
+    data?: any;
+}
+
+export interface ConsistencyScore {
+    overall: number;
+    components: {
+        winRateStability: number;
+        pnlVariance: number;
+        tradeFrequencyRegularity: number;
+        drawdownRecoveryTime: number;
+        profitFactorStability: number;
+    };
+    recommendation: string;
+}
+
+export interface CapitalEfficiency {
+    score: number;
+    level: 'INEFFICIENT' | 'AVERAGE' | 'GOOD' | 'EXCELLENT';
+    totalCapitalDeployed: number;
+    netPnL: number;
+    recommendation: string;
+}
+
+export interface AdvancedAnalytics {
+    riskScore: RiskScore;
+    overtradingSignals: OvertradingSignal[];
+    consistencyScore: ConsistencyScore;
+    capitalEfficiency: CapitalEfficiency;
+}
