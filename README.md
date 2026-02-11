@@ -12,7 +12,7 @@
 
 Retail traders on DEXs operate in the dark. They lack the self-awareness tools that institutional traders take for granted. Existing dashboards show *what* happened (PnL), but not *why* (Behavior).
 
-Most traders lose money because of psychology, not strategy.
+Most traders lose money because of psychology,not strategy.
 
 ## 💡 The Solution
 
