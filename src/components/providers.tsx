@@ -10,7 +10,7 @@ import { ThemeProvider } from 'next-themes';
 import { clusterApiUrl } from '@solana/web3.js';
 
 // Default styles for wallet adapter
-import '@solana/wallet-adapter-react-ui/styles.css';
+// Moved to layout.tsx
 
 export function Providers({ children }: { children: React.ReactNode }) {
     // Can be configured via .env to switch networks

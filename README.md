@@ -163,7 +163,7 @@ We built this with production-grade tools, optimized for speed and developer exp
 6. **Open the app**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
----
+
 
 ## 🌱 Using Sample Data (IMPORTANT)
 
@@ -250,4 +250,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ for the Deriverse community. Let's make retail traders as smart as institutions.**
+**Built by Pushpraj with ❤️ for the Deriverse community.**
