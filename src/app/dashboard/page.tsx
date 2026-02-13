@@ -9,6 +9,8 @@ import bs58 from "bs58";
 
 // Dashboard Components
 import { HeroMetrics } from "@/components/dashboard/hero-metrics";
+import { AdvancedMetrics } from "@/components/dashboard/advanced-metrics";
+import { OvertradingAlerts } from "@/components/dashboard/overtrading-alerts";
 import { DashboardFilters } from "@/components/dashboard/filters";
 import { EquityCurveChart } from "@/components/dashboard/equity-curve";
 import { DrawdownChart } from "@/components/dashboard/drawdown-chart";
@@ -164,11 +166,21 @@ Issued At: ${new Date().toISOString()}`;
                 ) : analytics ? (
                     // Dashboard Content
                     <div className="space-y-6 p-6">
+                        {/* Overtrading Alerts */}
+                        <OvertradingAlerts signals={analytics.overtradingSignals} />
+
                         {/* Hero Metrics */}
                         <HeroMetrics
                             core={analytics.core}
                             winRate={analytics.winRate}
                             expectancy={analytics.expectancy}
+                        />
+
+                        {/* Advanced Metrics */}
+                        <AdvancedMetrics
+                            riskScore={analytics.riskScore}
+                            consistencyScore={analytics.consistencyScore}
+                            capitalEfficiency={analytics.capitalEfficiency}
                         />
 
                         {/* Filters */}

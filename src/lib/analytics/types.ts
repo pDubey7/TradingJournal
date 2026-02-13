@@ -150,6 +150,12 @@ export interface CompleteAnalytics {
     dailyPerformance: DailyStats[];
     hourlyPerformance: HourlyStats[];
     orderTypePerformance: OrderTypeStats[];
+
+    // Advanced Metrics
+    riskScore: RiskScore;
+    overtradingSignals: OvertradingSignal[];
+    consistencyScore: ConsistencyScore;
+    capitalEfficiency: CapitalEfficiency;
 }
 
 // Advanced Analytics Types

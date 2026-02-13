@@ -9,6 +9,20 @@ interface TimePerformanceCardProps {
 
 export function TimePerformanceCard({ hourlyData }: TimePerformanceCardProps) {
     // Find best and worst hours
+    if (!hourlyData || hourlyData.length === 0) {
+        return (
+            <Card>
+                <CardHeader>
+                    <CardTitle>Time Performance</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div className="flex items-center justify-center h-40 text-muted-foreground">
+                        No performance data available
+                    </div>
+                </CardContent>
+            </Card>
+        );
+    }
     const sortedByPnL = [...hourlyData].sort((a, b) => b.pnl - a.pnl);
     const bestHour = sortedByPnL[0];
     const worstHour = sortedByPnL[sortedByPnL.length - 1];

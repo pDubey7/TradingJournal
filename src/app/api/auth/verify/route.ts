@@ -3,7 +3,7 @@ import { PublicKey } from '@solana/web3.js';
 import nacl from 'tweetnacl';
 import bs58 from 'bs58';
 import { db } from '@/db';
-import { users } from '@/db/schema';
+import { users, accounts } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { createSiwsMessage, setSessionCookie, signSession } from '@/lib/auth';
 
@@ -45,6 +45,20 @@ export async function POST(req: NextRequest) {
                 walletAddress: publicKey,
             }).returning();
             user = result[0];
+        }
+
+        // 3.5. Ensure Account Exists (Link User -> Account)
+        const account = await db.query.accounts.findFirst({
+            where: eq(accounts.userId, user.id),
+        });
+
+        if (!account) {
+            await db.insert(accounts).values({
+                userId: user.id,
+                name: 'Main Wallet',
+                address: publicKey,
+                platform: 'SOLANA_DEX',
+            });
         }
 
         // 4. Issue Session

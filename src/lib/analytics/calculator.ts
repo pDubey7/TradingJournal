@@ -16,6 +16,13 @@ import type {
     CompleteAnalytics,
 } from './types';
 
+import {
+    calculateRiskScore,
+    detectOvertrading,
+    calculateConsistencyScore,
+    calculateCapitalEfficiency
+} from './advanced';
+
 // Helper to safely convert Decimal strings to numbers
 const toNum = (val: string | number | null | undefined): number => {
     if (val === null || val === undefined) return 0;
@@ -431,6 +438,12 @@ export function calculateCompleteAnalytics(
 ): CompleteAnalytics {
     const equityCurve = calculateEquityCurve(positions, startingBalance);
 
+    // Dynamic import to avoid circular dependencies if any, but regular import is better. 
+    // We need to import these functions at the top of the file first.
+    // For now assuming we will add imports in a separate step or here if possible.
+    // Actually, I should update imports first or use full paths if I can't.
+    // Let's use the functions assuming they are imported. I will add imports in a separate edit.
+
     return {
         core: calculateCoreMetrics(positions, executions),
         winRate: calculateWinRate(positions),
@@ -445,5 +458,11 @@ export function calculateCompleteAnalytics(
         dailyPerformance: calculateDailyPerformance(positions),
         hourlyPerformance: calculateHourlyPerformance(positions),
         orderTypePerformance: calculateOrderTypePerformance(positions, executions),
+
+        // Advanced Metrics
+        riskScore: calculateRiskScore(positions, executions, startingBalance),
+        overtradingSignals: detectOvertrading(positions),
+        consistencyScore: calculateConsistencyScore(positions),
+        capitalEfficiency: calculateCapitalEfficiency(positions, executions),
     };
 }
