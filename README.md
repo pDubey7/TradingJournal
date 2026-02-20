@@ -16,6 +16,32 @@ Most trading dashboards are glorified spreadsheets. They show *what* happened (P
 
 We built a **behavioral coaching layer** that analyzes *how* you trade, not just your results. This is the kind of self-awareness tool that separates profitable traders from gamblers.
 
+## Live Devnet Integration (Official Program)
+
+This project integrates directly with the official Deriverse Devnet program:
+
+PROGRAM_ID = CDESjex4EDBKLwx9ZPzVbjiHEHatasb5fhSJZMzNfvw2
+VERSION = 6
+NETWORK = Solana Devnet
+
+We fetch wallet transactions from Solana RPC, filter interactions with the above PROGRAM_ID, compute balance deltas + fees for PnL estimation, and persist them in Postgres (onchain_trades). All analytics are derived from stored on-chain data — no mock APIs or indexers.
+
+🔐 Whitelisting
+
+Deriverse Devnet is currently in closed alpha.
+To generate live data:
+
+Get whitelisted via Deriverse Discord.
+
+Open an account on https://devnet.deriverse.io/
+
+Deposit Devnet SOL.
+
+Trade on the SOL/USDC spot market (internal USDC only).
+
+Only wallets that have interacted with the official program will display live analytics.
+If no live trades are found, the app gracefully falls back to demo mode for evaluation.
+
 ### 🎯 Bounty-Winning Features
 
 #### 1. 🎲 **Trader Risk Score (0-100)**
