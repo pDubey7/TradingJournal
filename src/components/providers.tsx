@@ -14,7 +14,7 @@ import { clusterApiUrl } from '@solana/web3.js';
 
 export function Providers({ children }: { children: React.ReactNode }) {
     // Can be configured via .env to switch networks
-    const network = WalletAdapterNetwork.Mainnet;
+    const network = (process.env.NEXT_PUBLIC_SOLANA_NETWORK as WalletAdapterNetwork) || WalletAdapterNetwork.Mainnet;
 
     // You can also provide a custom RPC endpoint.
     const endpoint = useMemo(() => process.env.NEXT_PUBLIC_RPC_URL || clusterApiUrl(network), [network]);
