@@ -120,32 +120,45 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
 
 /* Wallet Modal Overrides */
+@import "@solana/wallet-adapter-react-ui/styles.css";
+
 .wallet-adapter-modal-wrapper {
-  background: var(--background) !important;
-  color: var(--foreground) !important;
+  background: var(--background, #000) !important;
+  color: var(--foreground, #fff) !important;
+  border: 1px solid var(--border) !important;
 }
 
 .wallet-adapter-modal-button-close {
-  background: var(--secondary) !important;
-  color: var(--secondary-foreground) !important;
+  background: var(--secondary, #333) !important;
+  color: var(--secondary-foreground, #fff) !important;
 }
 
 .wallet-adapter-modal-title {
-  color: var(--foreground) !important;
+  color: var(--foreground, #fff) !important;
 }
 
 .wallet-adapter-modal-list .wallet-adapter-button {
-  background: var(--card) !important;
-  color: var(--card-foreground) !important;
+  background: var(--card, #111) !important;
+  color: var(--card-foreground, #fff) !important;
   border: 1px solid var(--border) !important;
 }
 
 .wallet-adapter-modal-list .wallet-adapter-button:hover {
-  background: var(--accent) !important;
+  background: var(--accent, #222) !important;
+}
+
+.wallet-adapter-modal-list .wallet-adapter-button-checkmark {
+  fill: var(--primary) !important;
+}
+
+/* Ensure text is visible in the list */
+.wallet-adapter-button {
+  font-weight: 500 !important;
 }

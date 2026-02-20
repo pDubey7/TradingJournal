@@ -73,10 +73,12 @@ export default function DashboardPage() {
             const nonceRes = await fetch('/api/auth/nonce');
             const { nonce } = await nonceRes.json();
 
-            // Create SIWS message
+            // Create SIWS message (Sign In With Solana)
             const domain = window.location.host;
             const origin = window.location.origin;
             const statement = 'Sign in to Deriverse Analytics to view your private trading journal.';
+            const networkName = process.env.NEXT_PUBLIC_SOLANA_NETWORK || 'mainnet-beta';
+
             const fullMessage = `${domain} wants you to sign in with your Solana account:
 ${publicKey.toBase58()}
 
@@ -84,6 +86,7 @@ ${statement}
 
 URI: ${origin}
 Version: 1
+Chain ID: ${networkName}
 Nonce: ${nonce}
 Issued At: ${new Date().toISOString()}`;
 
