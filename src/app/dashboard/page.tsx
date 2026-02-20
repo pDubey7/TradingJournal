@@ -131,7 +131,7 @@ Issued At: ${new Date().toISOString()}`;
             <header className="sticky top-0 z-20 flex h-16 items-center gap-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6">
                 <h1 className="text-xl font-bold tracking-tight">📊 Deriverse Analytics</h1>
                 <div className="ml-auto flex items-center gap-4">
-                    {session?.authenticated && (
+                    {session?.authenticated && publicKey && (
                         <>
                             <span className="text-sm text-muted-foreground">
                                 Last Sync: {syncMutation.isSuccess ? 'Just now' : '2 min ago'}
@@ -158,11 +158,13 @@ Issued At: ${new Date().toISOString()}`;
             <main className="flex-1">
                 {!publicKey ? (
                     // Not Connected
-                    <div className="flex h-[calc(100vh-4rem)] flex-col items-center justify-center space-y-4 p-8">
-                        <h2 className="text-3xl font-bold">Connect Wallet to Analyze Trades</h2>
-                        <p className="text-muted-foreground text-center max-w-md">
-                            Non-custodial, read-only analytics for your trading performance on Deriverse.
-                        </p>
+                    <div className="flex h-[calc(100vh-4rem)] flex-col items-center justify-center space-y-6 p-8">
+                        <div className="text-center space-y-2">
+                            <h2 className="text-3xl font-bold tracking-tight">Connect Wallet to Analyze Trades</h2>
+                            <p className="text-muted-foreground text-center max-w-md">
+                                Non-custodial, read-only analytics for your trading performance on Deriverse.
+                            </p>
+                        </div>
                         <ClientWalletButton />
                     </div>
                 ) : !session?.authenticated ? (
