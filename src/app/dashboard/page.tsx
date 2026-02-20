@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
+
 import { useWallet } from "@solana/wallet-adapter-react";
 import { ClientWalletButton } from "@/components/client-wallet-button";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Loader2, RefreshCw } from "lucide-react";
 import bs58 from "bs58";
 
@@ -24,6 +27,7 @@ import type { CompleteAnalytics } from "@/lib/analytics";
 export default function DashboardPage() {
     const { publicKey, signMessage } = useWallet();
     const queryClient = useQueryClient();
+    const [error, setError] = useState<string | null>(null);
 
     // Session Query
     const { data: session, isLoading: sessionLoading } = useQuery({
@@ -62,6 +66,8 @@ export default function DashboardPage() {
     const handleLogin = async () => {
         if (!publicKey || !signMessage) return;
 
+        setError(null);
+
         try {
             // Get Nonce
             const nonceRes = await fetch('/api/auth/nonce');
@@ -95,9 +101,16 @@ Issued At: ${new Date().toISOString()}`;
 
             if (verifyRes.ok) {
                 queryClient.invalidateQueries({ queryKey: ['session'] });
+            } else {
+                setError("Verification failed. Please try again.");
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error('Login failed:', error);
+            if (error?.name === 'WalletSignMessageError') {
+                setError("You declined the signature request. Please sign the message to log in.");
+            } else {
+                setError(error instanceof Error ? error.message : "An error occurred during sign in.");
+            }
         }
     };
 
@@ -154,6 +167,12 @@ Issued At: ${new Date().toISOString()}`;
                         <p className="text-muted-foreground text-center max-w-md">
                             We use wallet signatures to keep your journal private and secure.
                         </p>
+                        {error && (
+                            <Alert variant="destructive" className="max-w-md bg-destructive/10 border-destructive/20">
+                                <AlertTitle>Login Failed</AlertTitle>
+                                <AlertDescription>{error}</AlertDescription>
+                            </Alert>
+                        )}
                         <Button onClick={handleLogin} size="lg">
                             Sign In with Solana
                         </Button>

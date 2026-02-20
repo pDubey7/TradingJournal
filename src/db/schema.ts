@@ -178,3 +178,19 @@ export const snapshots = pgTable('snapshots', {
 export const snapshotsRelations = relations(snapshots, ({ one }) => ({
   account: one(accounts, { fields: [snapshots.accountId], references: [accounts.id] }),
 }));
+
+// Onchain Trades (Live Devnet Sync)
+export const onchainTrades = pgTable('onchain_trades', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  wallet: text('wallet').notNull(),
+  signature: text('signature').notNull().unique(),
+  timestamp: timestamp('timestamp').notNull(),
+  fee: numeric('fee', { precision: 20, scale: 10 }).notNull(),
+  pnlEstimate: numeric('pnl_estimate', { precision: 20, scale: 10 }).notNull(),
+  direction: text('direction'),
+  source: text('source').notNull().default('devnet-live'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, (t) => ({
+  walletIdx: index('idx_onchain_trades_wallet').on(t.wallet),
+  signatureIdx: index('idx_onchain_trades_signature').on(t.signature),
+}));
